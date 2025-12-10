@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/05 12:01:59 by erocha--          #+#    #+#             */
+/*   Updated: 2025/12/10 18:11:09 by erocha--         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
-long	ft_atol(char *str)
+long ft_atol(char *str)
 {
 	long	res;
 	int		i;
@@ -23,12 +35,15 @@ long	ft_atol(char *str)
 	return (sign * res);
 }
 
-int	ft_strcmp(char *stra, char *strb)
+void	ft_free_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (stra[i] == strb[i] && stra[i] && strb[i])
+	while (tab[i])
+	{
+		free(tab[i]);
 		i++;
-	return (stra[i] - strb[i]);
+	}
+	free(tab);
 }
