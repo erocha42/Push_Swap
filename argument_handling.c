@@ -6,7 +6,7 @@
 /*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:01:50 by erocha--          #+#    #+#             */
-/*   Updated: 2025/12/10 19:04:18 by erocha--         ###   ########.fr       */
+/*   Updated: 2025/12/13 14:58:20 by erocha--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,65 +28,56 @@ static int ft_strisdigit(char *str)
 	return (1);
 }
 
-static int	is_doublon(char *str, t_stack **stack)
-{
-	t_stack *current;
-	int		argument_value;
+/* argument_handling.c (Version Corrigée Robuste) */
 
-	current = *stack;
-	argument_value = ft_atoi(str);
-	while (current != NULL)
+static int	is_doublon(int *stack, int element)
+{
+	int i;
+
+	i = 0;
+	while (i < element)
 	{
-		if (argument_value == current->value)
+		if (stack[i] == stack[element])
 			return (1);
-		current = current->next;
+		i++;
 	}
 	return (0);
 }
 
-static void	push(char *str, t_stack **stack)
+static int	check_error(char **arguments, int index, int **stack, int element)
 {
-	t_stack *new_node;
-
-	new_node = malloc(sizeof(t_stack));
-	if (new_node == NULL)
-		return ;
-	new_node->value = ft_atoi(str);
-	new_node->next = *stack;
-	*stack = new_node;
-}
-
-int	check_error(char **arguments, char *argument, t_stack **stack)
-{
-	if (!ft_strisdigit(argument))
+	if (!ft_strisdigit(arguments[index]))
 		return (1);
-	if (ft_atol(argument) < INT_MIN || ft_atol(argument) > INT_MAX)
+	if (ft_atol(arguments[index]) < INT_MIN || ft_atol(arguments[index]) > INT_MAX)
 		return (1);
-	if (is_doublon(argument, stack))
-	{
-		ft_free_tab(arguments);
+	(*stack)[element] = ft_atoi(arguments[index]);
+	if (is_doublon(*stack, element))
 		return (1);
-	}
 	return (0);
 }
 
-int argument_handling(char **argv, t_stack **stack)
+int	argument_handling(char **argv, int **stack)
 {
 	char	**arguments;
 	int		i;
 	int		j;
+	int		k;
 
 	i = 1;
+	k = 0;
 	while (argv[i])
 	{
 		arguments = ft_split(argv[i], ' ');
 		j = 0;
 		while (arguments[j])
 		{
-			if (check_error(arguments, arguments[j], stack))
+			if (check_error(arguments, j, stack, k))
+			{
+				ft_free_tab(arguments);
 				return (1);
-			push(arguments[j], stack);
+			}
 			j++;
+			k++;
 		}
 		ft_free_tab(arguments);
 		i++;

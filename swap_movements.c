@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps.h                                               :+:      :+:    :+:   */
+/*   swap_movements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 14:28:11 by erocha--          #+#    #+#             */
-/*   Updated: 2025/12/12 20:48:19 by erocha--         ###   ########.fr       */
+/*   Created: 2025/12/12 19:19:06 by erocha--          #+#    #+#             */
+/*   Updated: 2025/12/12 21:26:00 by erocha--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_H
-#define PS_H
+/*#include "ps.h"
 
-#include <unistd.h>
-#include "libft/libft.h"
+void swap_a(t_stack **a)
+{
+	t_stack *node_to_swap;
 
-int main(int argc, char **argv);
-int argument_handling(char **argv, int **stack);
-long ft_atol(char *str);
-void ft_free_tab(char **tab);
-/*void push_a(int **a, int **b);
-void push_b(int **a, int **b);*/
-#endif
+	node_to_swap = (*a)->next;
+	node_to_swap->next = *a;
+	(*a) = node_to_swap;
+	write(1, "sa", 2);
+}
+
+void swap_b(t_stack **b)
+{
+	t_stack *node_to_swap;
+
+	node_to_swap = *b;
+	node_to_swap = (*b)->next;
+	node_to_swap->next = *b;
+	(*b) = node_to_swap;
+	write(1, "sb", 2);
+}*/
