@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rotate_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 12:02:09 by erocha--          #+#    #+#             */
-/*   Updated: 2025/12/14 12:56:01 by enzorolinux      ###   ########.fr       */
+/*   Created: 2025/12/14 18:06:13 by enzorolinux       #+#    #+#             */
+/*   Updated: 2025/12/14 18:31:58 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-static void	free_stack(t_stack **stack)
+void	rotate_logic(t_stack **stack)
 {
-	t_stack	*current;
-	t_stack	*next;
+	t_stack *last;
+	t_stack *node_to_move;
 
-	current = *stack;
-	while (current)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
-}
-
-int main(int argc, char **argv)
-{
-	t_stack	*a;
-
-	a = NULL;
-	if (argc < 2 || argument_handling(argv, &a))
-	{
-		write(2, "Error\n", 6);
-		free_stack(&a);
-		return (1);
-	}
-	free_stack(&a);
-	return (0);
+	node_to_move = *stack;
+	last = get_last_node(*stack);
+	node_to_move->prev = last;
+	node_to_move->next = NULL;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
 }

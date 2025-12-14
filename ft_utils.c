@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:01:59 by erocha--          #+#    #+#             */
-/*   Updated: 2025/12/10 18:11:09 by erocha--         ###   ########.fr       */
+/*   Updated: 2025/12/14 16:13:05 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,13 @@ void	ft_free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+t_stack	*get_last_node(t_stack *stack)
+{
+	if (stack == NULL)
+		return (NULL);
+	while (stack != NULL)
+		stack = stack->next;
+	return (stack);
 }

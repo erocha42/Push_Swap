@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_handling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 12:01:50 by erocha--          #+#    #+#             */
-/*   Updated: 2025/12/13 14:58:20 by erocha--         ###   ########.fr       */
+/*   Updated: 2025/12/14 18:02:26 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,56 +28,66 @@ static int ft_strisdigit(char *str)
 	return (1);
 }
 
-/* argument_handling.c (Version Corrigée Robuste) */
-
-static int	is_doublon(int *stack, int element)
+static int	is_doublon(char *str, t_stack **stack)
 {
-	int i;
+	t_stack *current;
+	int		argument_value;
 
-	i = 0;
-	while (i < element)
+	current = *stack;
+	argument_value = ft_atoi(str);
+	while (current != NULL)
 	{
-		if (stack[i] == stack[element])
+		if (argument_value == current->value)
 			return (1);
-		i++;
+		current = current->next;
 	}
 	return (0);
 }
 
-static int	check_error(char **arguments, int index, int **stack, int element)
+int check_error(char **arguments, int index, t_stack **stack)
 {
 	if (!ft_strisdigit(arguments[index]))
 		return (1);
 	if (ft_atol(arguments[index]) < INT_MIN || ft_atol(arguments[index]) > INT_MAX)
 		return (1);
-	(*stack)[element] = ft_atoi(arguments[index]);
-	if (is_doublon(*stack, element))
+	if (is_doublon(arguments[index], stack))
+	{
+		ft_free_tab(arguments);
 		return (1);
+	}
 	return (0);
 }
 
-int	argument_handling(char **argv, int **stack)
+static void	push(char *str, t_stack **stack)
+{
+	t_stack *new_node;
+
+	new_node = malloc(sizeof(t_stack));
+	if (new_node == NULL)
+		return ;
+	new_node->value = ft_atoi(str);
+	new_node->prev = NULL;
+	new_node->next = *stack;
+	if (*stack != NULL)
+		(*stack)->prev = new_node;
+	*stack = new_node;
+}
+
+int argument_handling(char **argv, t_stack **stack)
 {
 	char	**arguments;
 	int		i;
 	int		j;
-	int		k;
 
 	i = 1;
-	k = 0;
 	while (argv[i])
 	{
 		arguments = ft_split(argv[i], ' ');
 		j = 0;
 		while (arguments[j])
 		{
-			if (check_error(arguments, j, stack, k))
-			{
-				ft_free_tab(arguments);
-				return (1);
-			}
+			push(arguments[j], stack);
 			j++;
-			k++;
 		}
 		ft_free_tab(arguments);
 		i++;
