@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   swap_movements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:20:40 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/06 15:20:41 by erocha--         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:24:13 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-static void	swap_logic(t_stack **stack)
+void	swap_logic(t_stack **stack)
 {
 	t_stack	*n1;
 	t_stack	*n2;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate_movements.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:19:12 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/06 15:19:13 by erocha--         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:24:03 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-static void	reverse_rotate_logic(t_stack **stack)
+void	reverse_rotate_logic(t_stack **stack)
 {
 	t_stack	*last_node;
 	t_stack	*new_last;
