@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:19:19 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/06 15:19:51 by erocha--         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:24:07 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-static void	rotate_logic(t_stack **stack)
+void	rotate_logic(t_stack **stack)
 {
 	t_stack	*last;
 	t_stack	*node_to_move;

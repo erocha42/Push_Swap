@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:16:20 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/06 15:42:11 by erocha--         ###   ########.fr       */
+/*   Updated: 2026/01/08 18:39:18 by enzorolinux      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,18 @@ long	ft_atol(char *str);
 void	ft_free_tab(char **tab);
 t_stack	*get_last_node(t_stack *stack);
 int		args_counter(t_stack *a);
+void	push_logic(t_stack **a, t_stack **b);
 void	push_a(t_stack **a, t_stack **b);
 void	push_b(t_stack **a, t_stack **b);
+void	reverse_rotate_logic(t_stack **stack);
 void	reverse_rotate_a(t_stack **a);
 void	reverse_rotate_b(t_stack **b);
 void	reverse_rotate_rotate(t_stack **a, t_stack **b);
+void	rotate_logic(t_stack **stack);
 void	rotate_a(t_stack **a);
 void	rotate_b(t_stack **b);
 void	rotate_rotate(t_stack **a, t_stack **b);
+void	swap_logic(t_stack **stack);
 void	swap_a(t_stack **a);
 void	swap_b(t_stack **b);
 void	swap_swap(t_stack **a, t_stack **b);
