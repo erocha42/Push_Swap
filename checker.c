@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:23:42 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/06 18:33:43 by erocha--         ###   ########.fr       */
+/*   Updated: 2026/01/08 14:23:50 by erocha--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+#include "GNL/get_next_line.h"
 
 static void	free_stack(t_stack **stack)
 {
@@ -45,11 +46,12 @@ static int	void_argument(int argc, char **argv)
 	}
 	return (0);
 }
+#include "stdio.h"
 
 int main(int argc, char **argv)
 {
 	t_stack	*a;
-	int		args_nbr;
+	char	**moves;
 
 	a = NULL;
 	if (argc < 2 || argument_handling(argv, &a) || void_argument(argc, argv))
@@ -58,4 +60,6 @@ int main(int argc, char **argv)
 		free_stack(&a);
 		return (1);
 	}
+	moves = ft_split(get_next_line(0), ' ');
+	printf("%s", moves[1]);
 }
