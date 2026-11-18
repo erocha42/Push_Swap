@@ -4,26 +4,27 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g -I.
 LIBFT			= ./libft/libft.a
 
-SRC				=	argument_handling.c \
-					ft_utils.c \
-					ft_utils_stacks.c \
-					push_movements.c \
-					reverse_rotate_movements.c \
-					rotate_movements.c \
-					swap_movements.c \
-					turkish_sort.c \
-					sort_three.c \
-					analysis_functions.c
+SRC				=	PS/argument_handling.c \
+					PS/ft_utils.c \
+					PS/ft_utils_stacks.c \
+					PS/push_movements.c \
+					PS/reverse_rotate_movements.c \
+					PS/rotate_movements.c \
+					PS/swap_movements.c \
+					PS/turkish_sort.c \
+					PS/sort_three.c \
+					PS/analysis_functions.c
 
-SRC_CHECKER		=	argument_handling.c \
-					push_movements.c \
-					reverse_rotate_movements.c \
-					rotate_movements.c \
-					swap_movements.c \
-					ft_utils_stacks.c \
-					ft_utils.c \
+SRC_CHECKER		=	PS/argument_handling.c \
+					PS/push_movements.c \
+					PS/reverse_rotate_movements.c \
+					PS/rotate_movements.c \
+					PS/swap_movements.c \
+					PS/ft_utils_stacks.c \
+					PS/ft_utils.c \
 					GNL/get_next_line.c \
-					GNL/get_next_line_utils.c
+					GNL/get_next_line_utils.c \
+					BONUS/checker_utils.c
 
 OBJ				= $(SRC:.c=.o)
 OBJ_CHECKER		= $(SRC_CHECKER:.c=.o)
@@ -31,7 +32,7 @@ OBJ_CHECKER		= $(SRC_CHECKER:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) -g $(CFLAGS) $(OBJ) main.c $(LIBFT) -o $(NAME)
+	$(CC) -g $(CFLAGS) $(OBJ) PS/main.c $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C ./libft
@@ -39,7 +40,7 @@ $(LIBFT):
 bonus: $(NAME_CHECKER)
 	
 $(NAME_CHECKER): $(LIBFT) $(OBJ_CHECKER)
-		$(CC) -g $(CFLAGS) $(OBJ_CHECKER) checker.c $(LIBFT) -o $(NAME_CHECKER)
+		$(CC) -g $(CFLAGS) $(OBJ_CHECKER) BONUS/checker.c $(LIBFT) -o $(NAME_CHECKER)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -52,7 +53,7 @@ clean:
 fclean: clean
 	$(MAKE) fclean -C ./libft
 	rm -f $(NAME)
-	rn -f $(NAME_CHECKER)
+	rm -f $(NAME_CHECKER)
 
 re: fclean all
 

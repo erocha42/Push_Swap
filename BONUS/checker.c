@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
+/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 18:23:42 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/08 18:58:20 by enzorolinux      ###   ########.fr       */
+/*   Updated: 2026/01/13 07:43:08 by erocha--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	void_argument(int argc, char **argv)
 	return (0);
 }
 
-static int	exec_move(t_stack **a, t_stack **b, char *move)
+int	move_exec(t_stack **a, t_stack **b, char *move)
 {
 	if (!ft_strncmp(move, "pa\n", 3))
 		push_logic(a, b);
@@ -57,35 +57,22 @@ static int	exec_move(t_stack **a, t_stack **b, char *move)
 		rotate_logic(a);
 	else if (!ft_strncmp(move, "rb\n", 3))
 		rotate_logic(b);
-	else if (!ft_strncmp(move, "rr\n", 3))
-	{
-		rotate_logic(a);
-		rotate_logic(b);
-	}
 	else if (!ft_strncmp(move, "rra\n", 4))
 		reverse_rotate_logic(a);
 	else if (!ft_strncmp(move, "rrb\n", 4))
 		reverse_rotate_logic(b);
-	else if (!ft_strncmp(move, "rrr\n", 4))
-	{
-		reverse_rotate_logic(a);
-		reverse_rotate_logic(b);
-	}
 	else if (!ft_strncmp(move, "sa\n", 3))
 		swap_logic(a);
 	else if (!ft_strncmp(move, "sb\n", 3))
 		swap_logic(b);
-	else if (!ft_strncmp(move, "ss\n", 3))
-	{
-		swap_logic(a);
-		swap_logic(b);
-	}
+	else if (extended_move_exec(a, b, move))
+		return (1);
 	else
 		return (0);
 	return (1);
 }
 
-static int is_sort(t_stack *a, t_stack *b)
+static int	is_sort(t_stack *a, t_stack *b)
 {
 	if (b != NULL)
 		return (0);
@@ -101,40 +88,30 @@ static int is_sort(t_stack *a, t_stack *b)
 	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack	*a;
-	t_stack *b;
+	t_stack	*b;
 	char	*move;
 
 	a = NULL;
 	b = NULL;
-	if (argc < 2 || argument_handling(argv, &a) || void_argument(argc, argv))
+	if (argc < 2)
+		return (1);
+	if (argument_handling(argv, &a) || void_argument(argc, argv))
 	{
 		write(2, "Error\n", 6);
 		free_stack(&a);
 		return (1);
 	}
 	move = get_next_line(0);
-	while (move != NULL)
-	{
-		if (!exec_move(&a, &b, move))
-		{
-			write(2, "Error\n", 6);
-			free_stack(&a);
-			free_stack(&b);
-			free(move);
-			return (1);
-		}
-		free(move);
-		move = get_next_line(0);
-	}
+	if (!check_movements(&a, &b, move))
+		return (1);
 	if (is_sort(a, b))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
 	free_stack(&a);
 	free_stack(&b);
-	free(move);
 	return (0);
 }

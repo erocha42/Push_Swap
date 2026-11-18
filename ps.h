@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enzorolinux <enzorolinux@student.42.fr>    +#+  +:+       +#+        */
+/*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:16:20 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/08 18:39:18 by enzorolinux      ###   ########.fr       */
+/*   Updated: 2026/01/12 11:42:20 by erocha--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ void	set_target_b(t_stack *a, t_stack *b);
 void	set_target_a(t_stack *a, t_stack *b);
 void	set_price(t_stack *a, t_stack *b);
 void	set_cheapest(t_stack *a);
+int		move_exec(t_stack **a, t_stack **b, char *move);
+int		extended_move_exec(t_stack **a, t_stack **b, char *move);
+int		check_movements(t_stack **a, t_stack **b, char *move);
 
 #endif

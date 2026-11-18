@@ -6,7 +6,7 @@
 /*   By: erocha-- <erocha--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:41:01 by erocha--          #+#    #+#             */
-/*   Updated: 2026/01/06 18:30:56 by erocha--         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:37:15 by erocha--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_stack(t_stack **stack)
 	t_stack	*current;
 	t_stack	*next;
 
-	current = *stack;
+	current = *stack;	
 	while (current)
 	{
 		next = current->next;
@@ -59,28 +59,45 @@ static int	void_argument(int argc, char **argv)
 	return (0);
 }
 
+static int	is_sort(t_stack *a, t_stack *b)
+{
+	if (b != NULL)
+		return (0);
+	while (a != NULL)
+	{
+		if (a->prev != NULL)
+		{
+			if (a->prev->value > a->value)
+				return (0);
+		}
+		a = a->next;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		args_nbr;
 
 	a = NULL;
 	b = NULL;
-	if (argc < 2 || argument_handling(argv, &a) || void_argument(argc, argv))
+	if (argc < 2)
+		return (1);
+	if (argument_handling(argv, &a) || void_argument(argc, argv))
 	{
 		write(2, "Error\n", 6);
 		free_stack(&a);
 		return (1);
 	}
-	args_nbr = args_counter(a);
-	if (args_nbr < 4)
+	if (args_counter(a) < 4)
 	{
-		special_case_handling(&a, args_nbr);
+		special_case_handling(&a, args_counter(a));
 		free_stack(&a);
 		return (0);
 	}
-	turkish_sort(&a, &b);
+	if (!is_sort(a, b))
+		turkish_sort(&a, &b);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);
